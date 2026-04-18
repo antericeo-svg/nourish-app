@@ -93,15 +93,13 @@ export default function NourishLanding() {
 
           {/* Beehiiv Email Capture */}
           <div style={{ maxWidth: 460 }}>
-            <iframe
+        <iframe
               src="https://subscribe-forms.beehiiv.com/e6c75e01-7ac6-425f-845f-46ffd4ce1f27"
               data-test-id="beehiiv-embed"
               frameBorder="0"
               scrolling="no"
-              style={{ width: "100%", height: 200, margin: 0, borderRadius: 12, backgroundColor: "transparent", border: "none", maxWidth: "100%" }}
-            /></div>
-          <p style={{ fontSize: 12, color: "#b5a898", marginTop: 12 }}>Free forever plan available. No credit card required.</p>
-        </div>
+              style={{ width: "100%", height: 300, margin: 0, borderRadius: 12, backgroundColor: "transparent", border: "none", maxWidth: "100%" }}
+            ></iframe></div>
 
         {/* Hero visual - app preview */}
         <div style={{
