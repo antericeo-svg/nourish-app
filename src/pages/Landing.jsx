@@ -20,6 +20,14 @@ export default function NourishLanding() {
     return () => obs.disconnect();
   }, []);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://subscribe-forms.beehiiv.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { if (document.body.contains(script)) document.body.removeChild(script); };
+  }, []);
+
   const features = [
     { icon: "🤖", title: "AI-Powered Suggestions", desc: "Tell Claude your goals and get personalized meal ideas instantly. High protein? Vegan? Under 500 calories? Just ask." },
     { icon: "📊", title: "Smart Macro Tracking", desc: "Visual progress rings track your daily calories, protein, carbs, and fat against your custom targets." },
@@ -92,14 +100,11 @@ export default function NourishLanding() {
           </p>
 
           {/* Beehiiv Email Capture */}
-          <div style={{ maxWidth: 460 }}>
-        <iframe
-              src="https://subscribe-forms.beehiiv.com/e6c75e01-7ac6-425f-845f-46ffd4ce1f27"
-              data-test-id="beehiiv-embed"
-              frameBorder="0"
-              scrolling="no"
-              style={{ width: "100%", height: 300, margin: 0, borderRadius: 12, backgroundColor: "transparent", border: "none", maxWidth: "100%" }}
-            ></iframe></div>
+          <div style={{ maxWidth: 460 }}
+            dangerouslySetInnerHTML={{ __html: '<iframe src="https://subscribe-forms.beehiiv.com/e6c75e01-7ac6-425f-845f-46ffd4ce1f27" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;height:300px;margin:0;border-radius:12px;background-color:transparent;border:none;max-width:100%;"></iframe>' }}
+          />
+          <p style={{ fontSize: 12, color: "#b5a898", marginTop: 12 }}>Free forever plan available. No credit card required.</p>
+        </div>
 
         {/* Hero visual - app preview */}
         <div style={{
@@ -187,16 +192,16 @@ export default function NourishLanding() {
               { step: "01", title: "Set your goals", desc: "Tell us your calorie target, dietary preference, and how many meals you want to plan." },
               { step: "02", title: "Fill your week", desc: "Pick from curated meals, use AI suggestions, or auto-fill in one click. Adjust as you go." },
               { step: "03", title: "Shop & eat", desc: "Grab your auto-generated grocery list, hit the store, and enjoy a week of meals you actually want to eat." },
-            ].map((s, i) => (
+            ].map((st, i) => (
               <div key={i} style={{ textAlign: "center" }}>
                 <div style={{
                   width: 56, height: 56, borderRadius: "50%", background: "#3d5a40",
                   color: "white", display: "flex", alignItems: "center", justifyContent: "center",
                   fontSize: 18, fontWeight: 700, margin: "0 auto 16px",
                   fontFamily: "'Playfair Display', serif",
-                }}>{s.step}</div>
-                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#2d2418", margin: "0 0 8px" }}>{s.title}</h3>
-                <p style={{ fontSize: 13, color: "#8a7e72", lineHeight: 1.6, margin: 0 }}>{s.desc}</p>
+                }}>{st.step}</div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#2d2418", margin: "0 0 8px" }}>{st.title}</h3>
+                <p style={{ fontSize: 13, color: "#8a7e72", lineHeight: 1.6, margin: 0 }}>{st.desc}</p>
               </div>
             ))}
           </div>
@@ -258,7 +263,7 @@ export default function NourishLanding() {
                     </div>
                   ))}
                 </div>
-                <button style={{
+                <button onClick={() => navigate("/app")} style={{
                   width: "100%", padding: "13px 0", borderRadius: 10, border: "none",
                   background: p.highlight ? "linear-gradient(135deg, #3d5a40, #5a7d5e)" : "#f5f0eb",
                   color: p.highlight ? "white" : "#3d5a40",
