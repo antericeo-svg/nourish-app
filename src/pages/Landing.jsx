@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function NourishLanding() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
   const [visible, setVisible] = useState({});
   const sectionRefs = useRef([]);
@@ -21,11 +19,6 @@ export default function NourishLanding() {
     sectionRefs.current.forEach(el => { if (el) obs.observe(el); });
     return () => obs.disconnect();
   }, []);
-
-  const handleSubmit = (e) => {
-    e?.preventDefault?.();
-    if (email.trim() && email.includes("@")) setSubmitted(true);
-  };
 
   const features = [
     { icon: "🤖", title: "AI-Powered Suggestions", desc: "Tell Claude your goals and get personalized meal ideas instantly. High protein? Vegan? Under 500 calories? Just ask." },
@@ -98,40 +91,15 @@ export default function NourishLanding() {
             Nourish plans your meals, tracks your macros, and builds your grocery list — powered by AI that learns what you love.
           </p>
 
-          {/* Email capture */}
-          {!submitted ? (
-            <div style={{ display: "flex", gap: 10, maxWidth: 440 }}>
-              <input value={email} onChange={e => setEmail(e.target.value)} onKeyDown={e => e.key === "Enter" && handleSubmit()}
-                placeholder="Enter your email"
-                style={{
-                  flex: 1, padding: "14px 18px", borderRadius: 10, border: "1px solid #d9d0c5",
-                  fontSize: 14, fontFamily: "'DM Sans', sans-serif", outline: "none", transition: "border-color 0.2s",
-                }}
-                onFocus={e => e.currentTarget.style.borderColor = "#6b8f71"}
-                onBlur={e => e.currentTarget.style.borderColor = "#d9d0c5"}
-              />
-              <button onClick={handleSubmit} style={{
-                padding: "14px 28px", borderRadius: 10, border: "none",
-                background: "linear-gradient(135deg, #3d5a40, #5a7d5e)", color: "white",
-                fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
-                boxShadow: "0 4px 14px rgba(61,90,64,0.3)", transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(61,90,64,0.4)"; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(61,90,64,0.3)"; }}
-              >Start Free</button>
-            </div>
-          ) : (
-            <div style={{
-              padding: "16px 24px", borderRadius: 12, background: "#e8f0e8",
-              display: "flex", alignItems: "center", gap: 10, maxWidth: 440,
-            }}>
-              <span style={{ fontSize: 24 }}>🎉</span>
-              <div>
-                <div style={{ fontWeight: 700, color: "#3d5a40", fontSize: 15 }}>You're on the list!</div>
-                <div style={{ fontSize: 13, color: "#5a7d5e" }}>We'll notify you when Nourish launches.</div>
-              </div>
-            </div>
-          )}
+          {/* Beehiiv Email Capture */}
+          <div style={{ maxWidth: 460 }}>
+            <iframe
+              src="https://subscribe-forms.beehiiv.com/e6c75e01-7ac6-425f-845f-46ffd4ce1f27"
+              data-test-id="beehiiv-embed"
+              frameBorder="0"
+              scrolling="no"
+              style={{ width: "100%", height: 200, margin: 0, borderRadius: 12, backgroundColor: "transparent", border: "none", maxWidth: "100%" }}
+            /></div>
           <p style={{ fontSize: 12, color: "#b5a898", marginTop: 12 }}>Free forever plan available. No credit card required.</p>
         </div>
 
